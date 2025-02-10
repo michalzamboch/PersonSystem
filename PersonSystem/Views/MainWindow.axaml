@@ -1,0 +1,67 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:PersonSystem.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        d:DesignWidth="800"
+        d:DesignHeight="450"
+        Width="800"
+        Height="450"
+        MinWidth="800"
+        MinHeight="450"
+        x:Class="PersonSystem.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="PersonSystem">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <Grid ColumnDefinitions="*,*">
+        <Grid Grid.Column="0"
+              RowDefinitions="Auto,*">
+            <ListBox Grid.Row="1"
+                     x:Name="PeopleListBox"
+                     ItemsSource="{Binding People}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="Blue"
+                                BorderThickness="1" 
+                                CornerRadius="4"
+                                Padding="4">
+                            <TextBlock Text="{Binding Name}"/>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                
+                <ListBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Remove"
+                                  Command="{Binding RemovePersonCommand}"
+                                  CommandParameter="{Binding ElementName=PeopleListBox, Path=SelectedItem}"/>
+                    </ContextMenu>
+                </ListBox.ContextMenu>
+            </ListBox>
+        </Grid>
+        
+        <Grid Grid.Column="1"
+              RowDefinitions="Auto,*">
+            <ListBox Grid.Row="1"
+                     x:Name="NewPeopleListBox"
+                     ItemsSource="{Binding NewPeople}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="Blue"
+                                BorderThickness="1" 
+                                CornerRadius="4"
+                                Padding="4">
+                            <TextBlock Text="{Binding Name}"/>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+    </Grid>
+</Window>
