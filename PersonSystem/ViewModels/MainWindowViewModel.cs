@@ -17,7 +17,7 @@ internal class MainWindowViewModel : ViewModelBase
     
     public ObservableCollection<Person> OldPeople { get; }
 
-    private ObservableCollection<Person> _localNewPeople;
+    private ObservableCollection<Person> _localNewPeople = [];
     
     private ReadOnlyObservableCollection<Person> _newReadonlyPeople = ReadOnlyObservableCollection<Person>.Empty;
     public ReadOnlyObservableCollection<Person> NewReadonlyPeople
@@ -28,15 +28,16 @@ internal class MainWindowViewModel : ViewModelBase
     
     public ICommand RemovePersonCommand { get; }
     public ICommand ResetPeopleCommand { get; }
+    public ICommand AddNewPersonCommand { get; }
     
     public MainWindowViewModel()
     {
         OldPeople = new ObservableCollection<Person>(_inputPeople);
-        _localNewPeople = new ObservableCollection<Person>();
         NewReadonlyPeople = new ReadOnlyObservableCollection<Person>(_localNewPeople);
         
         RemovePersonCommand = new RelayCommand<Person>(RemovePerson);
         ResetPeopleCommand = new RelayCommand(ResetPeople);
+        AddNewPersonCommand = new RelayCommand(AddNewPerson);
     }
 
     private void RemovePerson(Person? input)
@@ -52,5 +53,10 @@ internal class MainWindowViewModel : ViewModelBase
     {
         _localNewPeople = new ObservableCollection<Person>(_inputPeople);
         NewReadonlyPeople = new ReadOnlyObservableCollection<Person>(_localNewPeople);
+    }
+
+    private void AddNewPerson()
+    {
+        _localNewPeople.Add(new Person() { Name = "Paul", Age = 40 });
     }
 }

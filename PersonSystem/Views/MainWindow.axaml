@@ -63,7 +63,10 @@
                 </ListBox.ItemTemplate>
             </ListBox>
             
-            <StackPanel Grid.Row="1">
+            <StackPanel Grid.Row="1"
+                        Orientation="Horizontal">
+                <Button Content="Add"
+                        Command="{Binding AddNewPersonCommand}"/>
                 <Button Content="Reset"
                         Command="{Binding ResetPeopleCommand}"/>
             </StackPanel>
