@@ -24,7 +24,7 @@
               RowDefinitions="Auto,*">
             <ListBox Grid.Row="1"
                      x:Name="PeopleListBox"
-                     ItemsSource="{Binding People}">
+                     ItemsSource="{Binding OldPeople}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border BorderBrush="Blue"
@@ -47,10 +47,10 @@
         </Grid>
         
         <Grid Grid.Column="1"
-              RowDefinitions="Auto,*">
-            <ListBox Grid.Row="1"
+              RowDefinitions="*, Auto">
+            <ListBox Grid.Row="0"
                      x:Name="NewPeopleListBox"
-                     ItemsSource="{Binding NewPeople}">
+                     ItemsSource="{Binding NewReadonlyPeople}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border BorderBrush="Blue"
@@ -62,6 +62,11 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+            
+            <StackPanel Grid.Row="1">
+                <Button Content="Reset"
+                        Command="{Binding ResetPeopleCommand}"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>
